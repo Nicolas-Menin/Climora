@@ -1,6 +1,6 @@
 import flet as ft
 from services.wheater_service import CityService
-
+import asyncio
 
 # pylint: disable=E1121,E1123
 
@@ -11,6 +11,9 @@ class Search(ft.Column):
         self.alignment = ft.CrossAxisAlignment.CENTER
         self.spacing = 10
         self.expand = True
+        self.page_ref = None
+
+
 
         self.search = ft.TextField(
             hint_text="Escribe una ciudad",
@@ -21,7 +24,6 @@ class Search(ft.Column):
             on_change=  self.search_city_on_change
         )
 
-        # ListView dentro de un Container que se expande
         self.list_cities = ft.ListView(
             width=300,
         )
@@ -36,10 +38,11 @@ class Search(ft.Column):
 
     async def search_city_on_change(self,e):
 
-        await self.city_controller.search_city(e,self)
+        await self.city_controller.search_city(e,self.page_ref)
 
 
-
+    def did_mount(self):
+        self.page_ref = self.page
 
 
 class SearchController:
@@ -74,7 +77,7 @@ class SearchController:
                             bgcolor="#353535",
                             trailing=ft.Icon(ft.Icons.CHEVRON_RIGHT),
                             hover_color="#4b4b4b",
-                            on_click=lambda : print("hola")))
+                            on_click = lambda e:  asyncio.create_task(page.push_route("/wheater"))))
 
 
         page.update()

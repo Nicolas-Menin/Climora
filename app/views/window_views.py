@@ -3,15 +3,17 @@ import asyncio
 
 import flet as ft
 from views.home_views import HomeView
-
+from views.wheater_views import WheaterView
 # pylint: disable=E1121,E1123
 class Window:
 
     def __init__(self,page: ft.Page):
 
         self.page = page
-        self.home_view = HomeView()
 
+        # Views
+        self.home_view = HomeView()
+        self.wheater_view = WheaterView()
          # Titulo
 
         self.page.title = "Climora"
@@ -118,6 +120,8 @@ class Window:
         if self.page.route == "/Home":
             self.page.views.append(self.home_view.setup("Colombo"))
 
+        if self.page.route == "/wheater":
+            self.page.views.append(self.wheater_view.setup())
         self.page.update()
 
     async def view_pop(self,e):
