@@ -1,7 +1,7 @@
 import asyncio
 import flet as ft
-from services.wheater_service import CityService
-from config.weather_icons import WEATHER_ICON
+from app.services.wheater_service import CityService
+from app.config.weather_icons import WEATHER_ICON
 
 # pylint: disable=E1121,E1123,E1101
 

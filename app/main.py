@@ -1,6 +1,5 @@
 import flet as ft
-from views.window_views import Window
-
+from app.views.window_views import Window
 # pylint: disable=too-many-positional-arguments
 
 async def main(page: ft.Page):

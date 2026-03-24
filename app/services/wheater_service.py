@@ -1,6 +1,6 @@
 
 import httpx
-from config.config import API_KEY
+from app.config.config import API_KEY
 
 
 class CityService:

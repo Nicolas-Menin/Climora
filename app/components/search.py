@@ -1,6 +1,6 @@
 import asyncio
 import flet as ft
-from services.wheater_service import CityService
+from app.services.wheater_service import CityService
 
 
 # pylint: disable=E1121,E1123,E1101

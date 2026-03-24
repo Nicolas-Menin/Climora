@@ -2,8 +2,8 @@ import asyncio
 
 
 import flet as ft
-from views.home_views import HomeView
-from views.weather_views import WeatherView
+from app.views.home_views import HomeView
+from app.views.weather_views import WeatherView
 # pylint: disable=E1121,E1123
 class Window:
     """Clase Principal en donde se maneja todo"""

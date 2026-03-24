@@ -1,6 +1,6 @@
 import flet as ft
 import asyncio
-from components.search import SearchController
+from app.components.search import SearchController
 
 # pylint: disable=E1121,E1123,E1101
 
