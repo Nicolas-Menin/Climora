@@ -10,4 +10,4 @@ Mini App de clima hecha con Python utilizando Flet y OpenWheaterAPI
 
 ## ESTADO
 
-- En desarrollo:  Falta hacer el Wheater View con la muestra de datos de la ciudad elegida en el buscador
+- Completa

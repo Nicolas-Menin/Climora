@@ -3,17 +3,17 @@ import asyncio
 
 import flet as ft
 from views.home_views import HomeView
-from views.wheater_views import WheaterView
+from views.weather_views import WeatherView
 # pylint: disable=E1121,E1123
 class Window:
-
+    """Clase Principal en donde se maneja todo"""
     def __init__(self,page: ft.Page):
 
         self.page = page
 
         # Views
-        self.home_view = HomeView()
-        self.wheater_view = WheaterView()
+        self.home_view = HomeView("Colombo")
+        self.weather_view = WeatherView(("Colombo","Reboto"))
          # Titulo
 
         self.page.title = "Climora"
@@ -41,26 +41,29 @@ class Window:
             "Reboto": "fonts/Reboto.ttf"
         }
 
-        self.page.on_route_change = self.route_change
-        self.page.on_view_pop = self.view_pop
+        self.page.on_route_change = self.route_change  # Se asigna la función que maneja el cambio de vistas
+        self.page.on_view_pop = self.view_pop          # Se asigna la función que maneja el cierre/eliminación de vistas
 
 
 
-        self.btn_start = ft.ElevatedButton(content= ft.Text(value="START",
-                                                            font_family="Reboto",size=25),
-                                                            color = "#ffffff",
-                                                            bgcolor="#2C5F5F",
-                                                            width=200,
-                                                            height=70,
-                                                            scale=1.0,
-                                                            animate_scale=ft.Animation(300,ft.AnimationCurve.EASE),
-                                                            on_hover= lambda e: self.elevate_button_animation(e,self.btn_start),
-                                                            on_click= lambda e: asyncio.create_task(self.page.push_route("/Home"))
-                                                        )
+        self.btn_start = ft.ElevatedButton(content= ft.Text(
+            value="START",
+            font_family="Reboto",size=25),
+            color = "#ffffff",
+            bgcolor="#2C5F5F",
+            width=200,
+            height=70,
+            scale=1.0,
+            animate_scale=ft.Animation(300,ft.AnimationCurve.EASE),
+            on_hover= lambda e: self.elevate_button_animation(e,self.btn_start),
+            on_click= lambda e: asyncio.create_task(self.page.push_route("/Home"))
+
+        )
 
 
 
     async def setup(self):
+        """Funcion donde inicializa el view"""
 
         self.page.views.append(
             ft.View(
@@ -92,7 +95,7 @@ class Window:
             )
         )
 
-        if not self.page.web:
+        if not self.page.web: # Si no esta en modo web centra la pantalla (Parece no funcionar)
             await self.page.window.center()
 
         self.page.window.visible = True
@@ -100,7 +103,7 @@ class Window:
 
 
     def elevate_button_animation(self,e,btn):
-
+        """Animacion zoomin y zoomout en el boton tipo Elevate"""
         if e.data:
             btn.scale = 1.2
 
@@ -112,20 +115,18 @@ class Window:
 
 
     def route_change(self):
-
+        """Control de cambio de Views"""
         self.page.views.clear()
 
 
-
-        if self.page.route == "/Home":
-            self.page.views.append(self.home_view.setup("Colombo"))
-
-        if self.page.route == "/wheater":
-            self.page.views.append(self.wheater_view.setup())
+        if self.page.route.startswith("/Home"):
+            self.page.views.append(self.home_view)
+        if self.page.route.startswith("/weather"):
+            self.page.views.append(self.weather_view)
         self.page.update()
 
     async def view_pop(self,e):
-
+        """Elimina el view actual para ir al view elegido"""
         if e.view is not None:
 
             self.page.views.remove(e.view)
