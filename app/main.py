@@ -11,4 +11,9 @@ async def main(page: ft.Page):
 
 if __name__ == "__main__":
 
-    ft.run(main,view=ft.AppView.FLET_APP,assets_dir="assets")
+    ft.app(
+        target=main,
+        host="0.0.0.0",
+        port=10000,
+        assets_dir="assets"
+    )
