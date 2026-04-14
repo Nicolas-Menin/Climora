@@ -1,6 +1,6 @@
 # CLIMORA
 
-Mini App de clima hecha con Python utilizando Flet y OpenWheaterAPI
+App de clima hecha con Python utilizando Flet y OpenWheaterAPI
 
 ## CARACTERISTICAS
 
